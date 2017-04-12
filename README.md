@@ -41,6 +41,10 @@ Testing your own NU Chitter implementation should be straightforward. Additional
 Your program also MUST be thread safe. We will be stress testing it to make sure that there are not any incorrect behaviors. You can check for race conditions by using the following command when you test your server:
 
 go run -race chitter.go 12345
+
+
+
+
 Suggested Plan of attack
 
 Below is an outline of our suggest plan of attack. If you are already comfortable with Go, the following can still serve as a useful guide for the suggested order in which to implement each feature.
