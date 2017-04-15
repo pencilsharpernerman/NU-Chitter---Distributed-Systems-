@@ -268,6 +268,7 @@ fmt.Print("Message from server: "+message)
 func listenForReply(conn net.Conn){
 	for{
 	message, _ := bufio.NewReader(conn).ReadString('\n')
+	
 	fmt.Print("Message from server: "+message)
 }
 }
@@ -279,8 +280,8 @@ func main() {
     if len(os.Args) < 2 {
         os.Exit(1)
     }
-    if  "-c" == os.Args[1] {
-    	IP = os.Args[2]
+    if  "-c" == os.Args[1] && len(os.Args) > 2 {
+    	IP := os.Args[2]
     	var clientport string = os.Args[3]
     	conn , err:= net.Dial("tcp" , IP+":"+clientport)
     	if err != nil {
@@ -293,13 +294,17 @@ func main() {
 			reader := bufio.NewReader(os.Stdin) 
 			fmt.Println("after bufio")
 			text,err := reader.ReadString('\n')
-			fmt.Println("after ReadString")
+			
 			fmt.Println("TEXT"+ text)
 			if err != nil{
 			    fmt.Println("Unable to send to socket")
-			} else {
+			}else {
 
 			conn.Write([]byte(text))
+			if text == "exit\n"{
+			fmt.Println("exiting ...")
+			os.Exit(1)
+			}
 			}
 							
 			
